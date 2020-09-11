@@ -28462,7 +28462,7 @@ var App = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "state", {
       min: 1,
-      sec: 10,
+      sec: 5,
       play: false,
       modal: false,
       allBtns: [{

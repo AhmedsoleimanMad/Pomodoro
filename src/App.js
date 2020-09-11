@@ -5,7 +5,7 @@ import Timer from "./components/Timer"
 class App extends Component {
   state = {
     min: 1,
-    sec: 10,
+    sec: 5,
     play: false,
     modal:false,
 
