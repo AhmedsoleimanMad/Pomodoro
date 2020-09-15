@@ -1,6 +1,6 @@
 {
   "homepage": "https://AhmedsoleimanMad/reactbecode",
-  "name": "pomodoro",
+  "name": "reactbecode",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
@@ -20,6 +20,7 @@
     "react-dom": "^16.13.1"
   },
   "dependencies": {
+    "main.css": "^2.1.0",
     "save-dev": "0.0.1-security"
   }
 }

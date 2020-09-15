@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import Btns from "./components/Btns";
 import Modal from "./components/Modal";
 import Timer from "./components/Timer" 
+import "/main.css"
 class App extends Component {
   state = {
-    min: 1,
+    min: 15,
     sec: 5,
     play: false,
     modal:false,
@@ -40,6 +41,8 @@ class App extends Component {
         });
         
          let t = setInterval(() => {
+
+          console.log("Ahmed")
           this.state.play
           ? this.setState({
               sec: this.state.sec - 1,
@@ -57,7 +60,7 @@ class App extends Component {
             this.setState({
               play :false,
               modal:true,
-              min: 25,
+              min: 15,
               sec: 59,
 
             }) 
@@ -111,7 +114,7 @@ class App extends Component {
 
   render() {
     return (
-      <>
+      <div className="container">
         <Btns  status={this.state.play}  btns={this.state.allBtns}  click={this.btnHandeler} />
         <Timer sec = {this.state.sec} min = {this.state.min}/>
         <Modal closeModalAndRestarHandeler = {this.closeModalAndRestarHandeler}
@@ -119,7 +122,7 @@ class App extends Component {
                btnClose = {this.closeModalWithoutRestartHandeler}
                
                />
-      </>
+      </div>
     );
   }
 

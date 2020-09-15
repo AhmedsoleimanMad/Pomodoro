@@ -28308,7 +28308,79 @@ var btn = function btn(props) {
 
 var _default = btn;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"components/Btns.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"main.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/Btns.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28320,13 +28392,16 @@ var _react = _interopRequireDefault(require("react"));
 
 var _Btn = _interopRequireDefault(require("./Btn"));
 
+require("../main.css");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Btns = function Btns(props) {
   console.log(props.btns);
   var btns = props.btns.map(function (element, index) {
     return /*#__PURE__*/_react.default.createElement("li", {
-      key: index
+      key: index,
+      className: "btn"
     }, /*#__PURE__*/_react.default.createElement(_Btn.default, {
       icon: element.type == "play" && props.status == true ? element.iconPause : element.icon,
       click: function click() {
@@ -28341,7 +28416,7 @@ var Btns = function Btns(props) {
 
 var _default = Btns;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./Btn":"components/Btn.js"}],"components/Modal.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Btn":"components/Btn.js","../main.css":"main.css"}],"components/Modal.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28390,15 +28465,19 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+require("../main.css");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var timer = function timer(props) {
-  return /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, props.min), /*#__PURE__*/_react.default.createElement("li", null, ":"), /*#__PURE__*/_react.default.createElement("li", null, props.sec < 10 ? "0".concat(props.sec) : props.sec));
+  return /*#__PURE__*/_react.default.createElement("ul", {
+    className: "timer"
+  }, /*#__PURE__*/_react.default.createElement("li", null, props.min), /*#__PURE__*/_react.default.createElement("li", null, ":"), /*#__PURE__*/_react.default.createElement("li", null, props.sec < 10 ? "0".concat(props.sec) : props.sec));
 };
 
 var _default = timer;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../main.css":"main.css"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28413,6 +28492,8 @@ var _Btns = _interopRequireDefault(require("./components/Btns"));
 var _Modal = _interopRequireDefault(require("./components/Modal"));
 
 var _Timer = _interopRequireDefault(require("./components/Timer"));
+
+require("/main.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28461,7 +28542,7 @@ var App = /*#__PURE__*/function (_Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      min: 1,
+      min: 15,
       sec: 5,
       play: false,
       modal: false,
@@ -28489,6 +28570,7 @@ var App = /*#__PURE__*/function (_Component) {
           });
 
           var t = setInterval(function () {
+            console.log("Ahmed");
             _this.state.play ? _this.setState({
               sec: _this.state.sec - 1
             }) : clearInterval(t);
@@ -28504,7 +28586,7 @@ var App = /*#__PURE__*/function (_Component) {
               _this.setState({
                 play: false,
                 modal: true,
-                min: 25,
+                min: 15,
                 sec: 59
               });
             }
@@ -28558,7 +28640,9 @@ var App = /*#__PURE__*/function (_Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Btns.default, {
+      return /*#__PURE__*/_react.default.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/_react.default.createElement(_Btns.default, {
         status: this.state.play,
         btns: this.state.allBtns,
         click: this.btnHandeler
@@ -28578,7 +28662,7 @@ var App = /*#__PURE__*/function (_Component) {
 
 var _default = App;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./components/Btns":"components/Btns.js","./components/Modal":"components/Modal.js","./components/Timer":"components/Timer.js"}],"index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./components/Btns":"components/Btns.js","./components/Modal":"components/Modal.js","./components/Timer":"components/Timer.js","/main.css":"main.css"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var React = _interopRequireWildcard(require("react"));
@@ -28622,7 +28706,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55083" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57127" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
