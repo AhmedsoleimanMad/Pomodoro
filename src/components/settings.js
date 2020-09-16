@@ -3,7 +3,7 @@ import React from "react";
 const style = {
   height: "50vh",
   position: "absolute",
-  top: "10%",
+  top: "3%",
   left: "0",
   bottom: "50%",
   display: "flex",
@@ -15,7 +15,7 @@ const style = {
   transition: ".5s transform ease-in",
   borderBottomRightRadius: "490px",
   borderTopRightRadius: "490px",
-  boxShadow: "-1px 2px 21px 1px #111",
+  boxShadow: "-1px 2px 6px 1px #111",
 };
 
 const inputStyle = {

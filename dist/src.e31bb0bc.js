@@ -28511,7 +28511,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var style = {
   height: "50vh",
   position: "absolute",
-  top: "10%",
+  top: "3%",
   left: "0",
   bottom: "50%",
   display: "flex",
@@ -28523,7 +28523,7 @@ var style = {
   transition: ".5s transform ease-in",
   borderBottomRightRadius: "490px",
   borderTopRightRadius: "490px",
-  boxShadow: "-1px 2px 21px 1px #111"
+  boxShadow: "-1px 2px 6px 1px #111"
 };
 var inputStyle = {
   padding: "10px 20px",
@@ -28659,7 +28659,7 @@ var App = /*#__PURE__*/function (_Component) {
         iconPause: "fas fa-pause"
       }, {
         type: "stop",
-        icon: "fas fa-stop"
+        icon: "fas fa-sync-alt"
       }, {
         type: "minus",
         icon: "fas fa-minus"
@@ -28746,7 +28746,7 @@ var App = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "regMinHandeler", function (e) {
       _this.setState({
-        min: e.target.value > 25 || e.target.value < 0 || e.target.value == "" ? 0 : parseInt(e.target.value)
+        min: e.target.value > 25 || e.target.value < 0 || e.target.value == "" ? " " : parseInt(e.target.value)
       });
     });
 
@@ -28843,7 +28843,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54417" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54635" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

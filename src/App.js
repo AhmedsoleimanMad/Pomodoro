@@ -22,7 +22,7 @@ class App extends Component {
       },
       {
         type: "stop",
-        icon: "fas fa-stop",
+        icon: "fas fa-sync-alt",
       },
       {
         type: "minus",
@@ -114,7 +114,7 @@ class App extends Component {
     this.setState({
       min:
         e.target.value > 25 || e.target.value < 0 || e.target.value == ""
-          ? 0
+          ? " "
           : parseInt(e.target.value),
     });
   };
