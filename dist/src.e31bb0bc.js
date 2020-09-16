@@ -28298,8 +28298,12 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var btn = function btn(props) {
+  console.log(props);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("button", {
     disabled: (props.type === "add" || props.type === "minus") && props.status,
+    style: {
+      color: (props.type === "add" || props.type === "minus") && props.status ? "#dc3545" : "#CCC"
+    },
     onClick: props.click
   }, props.children, /*#__PURE__*/_react.default.createElement("i", {
     className: props.icon
@@ -28414,7 +28418,8 @@ var Btns = function Btns(props) {
   return /*#__PURE__*/_react.default.createElement("ul", null, btns);
 };
 
-var _default = Btns;
+var _default = _react.default.memo(Btns);
+
 exports.default = _default;
 },{"react":"../node_modules/react/index.js","./Btn":"components/Btn.js","../main.css":"main.css"}],"components/Modal.js":[function(require,module,exports) {
 "use strict";
@@ -28430,17 +28435,24 @@ var _Btn = _interopRequireDefault(require("./Btn"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var modal = function modal(props) {
-  var styleModal = {
+  var _styleModal;
+
+  var styleModal = (_styleModal = {
     color: "#444",
-    backgroundColor: "rgba(0,0,0,0.4)",
-    display: props.modalState ? 'block' : 'none',
+    backgroundColor: "rgba(0,0,0,0.8)",
+    display: props.modalState ? "flex" : "none",
     position: "absolute",
-    top: '0',
-    left: '0',
-    bottom: '0',
-    right: '0'
-  };
+    top: "0",
+    left: "0",
+    bottom: "0",
+    right: "0",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column"
+  }, _defineProperty(_styleModal, "color", "#F4F4F4"), _defineProperty(_styleModal, "fontSize", "35px"), _styleModal);
   return /*#__PURE__*/_react.default.createElement("section", {
     style: styleModal
   }, /*#__PURE__*/_react.default.createElement("span", {
@@ -28448,7 +28460,7 @@ var modal = function modal(props) {
     onClick: props.btnClose
   }, /*#__PURE__*/_react.default.createElement("i", {
     className: "fas fa-times-circle"
-  })), /*#__PURE__*/_react.default.createElement("p", null, "It's the moment to take your break"), /*#__PURE__*/_react.default.createElement(_Btn.default, {
+  })), /*#__PURE__*/_react.default.createElement("p", null, "Le Lorem Ipsum est simplement du faux texte employ\xE9 dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les ann\xE9es 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour r\xE9aliser un livre sp\xE9cimen de polices de texte. Il n'a pas fait que survivre cinq si\xE8cles, mais s'est aussi adapt\xE9 \xE0 la bureautique informatique, sans que son"), /*#__PURE__*/_react.default.createElement(_Btn.default, {
     click: props.closeModalAndRestarHandeler
   }, "Close Modal and restart"));
 };
@@ -28472,12 +28484,102 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var timer = function timer(props) {
   return /*#__PURE__*/_react.default.createElement("ul", {
     className: "timer"
-  }, /*#__PURE__*/_react.default.createElement("li", null, props.min), /*#__PURE__*/_react.default.createElement("li", null, ":"), /*#__PURE__*/_react.default.createElement("li", null, props.sec < 10 ? "0".concat(props.sec) : props.sec));
+  }, /*#__PURE__*/_react.default.createElement("li", null, props.min < 10 ? "0".concat(props.min) : props.min), /*#__PURE__*/_react.default.createElement("li", null, ":"), /*#__PURE__*/_react.default.createElement("li", null, props.sec < 10 ? "0".concat(props.sec) : props.sec));
 };
 
-var _default = timer;
+var _default = _react.default.memo(timer);
+
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../main.css":"main.css"}],"App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../main.css":"main.css"}],"components/settings.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var style = {
+  height: "50vh",
+  position: "absolute",
+  top: "10%",
+  left: "0",
+  bottom: "50%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+  backgroundColor: "#f4f4f4",
+  width: "160px",
+  transition: ".5s transform ease-in",
+  borderBottomRightRadius: "490px",
+  borderTopRightRadius: "490px",
+  boxShadow: "-1px 2px 21px 1px #111"
+};
+var inputStyle = {
+  padding: "10px 20px",
+  border: "1px solid #130f40",
+  marginBottom: "10px"
+};
+var formStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column"
+};
+var iconStyle = {
+  color: "#F4F4F4",
+  position: "absolute",
+  right: "-41px",
+  fontSize: "40px"
+};
+
+var reglage = function reglage(props) {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: _objectSpread(_objectSpread({}, style), {}, {
+      transform: props.settingState && props.play ? "translateX(0%)" : "translateX(-100%)"
+    })
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    style: iconStyle,
+    onClick: props.clicked
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    style: {
+      color: props.play ? "#111" : "#dc3545"
+    },
+    className: "fas fa-cog"
+  })), /*#__PURE__*/_react.default.createElement("form", {
+    style: formStyle
+  }, /*#__PURE__*/_react.default.createElement("input", {
+    value: props.currentMin,
+    style: inputStyle,
+    onChange: props.min,
+    type: "number",
+    placeholder: "Min",
+    min: "0",
+    max: "25"
+  }), /*#__PURE__*/_react.default.createElement("input", {
+    value: props.currentSec,
+    style: inputStyle,
+    onChange: props.sec,
+    type: "number",
+    placeholder: "Sec",
+    min: "0",
+    max: "59"
+  })));
+};
+
+var _default = reglage;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28492,6 +28594,8 @@ var _Btns = _interopRequireDefault(require("./components/Btns"));
 var _Modal = _interopRequireDefault(require("./components/Modal"));
 
 var _Timer = _interopRequireDefault(require("./components/Timer"));
+
+var _settings = _interopRequireDefault(require("./components/settings"));
 
 require("/main.css");
 
@@ -28525,6 +28629,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var t;
+
 var App = /*#__PURE__*/function (_Component) {
   _inherits(App, _Component);
 
@@ -28546,6 +28652,7 @@ var App = /*#__PURE__*/function (_Component) {
       sec: 5,
       play: false,
       modal: false,
+      setting: false,
       allBtns: [{
         type: "play",
         icon: "fas fa-play",
@@ -28569,15 +28676,17 @@ var App = /*#__PURE__*/function (_Component) {
             play: !_this.state.play
           });
 
-          var t = setInterval(function () {
+          var _t = setInterval(function () {
             console.log("Ahmed");
-            _this.state.play ? _this.setState({
-              sec: _this.state.sec - 1
-            }) : clearInterval(t);
+            _this.state.play ? _this.setState(function (prevState) {
+              return {
+                sec: prevState === _this.state.sec ? _this.state.sec : _this.state.sec - 1
+              };
+            }) : clearInterval(_t);
 
             if (_this.state.sec === 0 && _this.state.min > 0) {
               _this.setState({
-                sec: 60,
+                sec: 59,
                 min: _this.state.min - 1
               });
             }
@@ -28591,6 +28700,7 @@ var App = /*#__PURE__*/function (_Component) {
               });
             }
           }, 1000);
+
           break;
 
         case "stop":
@@ -28634,12 +28744,31 @@ var App = /*#__PURE__*/function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "regMinHandeler", function (e) {
+      _this.setState({
+        min: e.target.value > 25 || e.target.value < 0 || e.target.value == "" ? 0 : parseInt(e.target.value)
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "regSecHandeler", function (e) {
+      _this.setState({
+        sec: e.target.value > 59 || e.target.value < 0 || e.target.value == "" ? 0 : parseInt(e.target.value)
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "settingHnadeler", function () {
+      _this.setState({
+        setting: !_this.state.setting
+      });
+    });
+
     return _this;
   }
 
   _createClass(App, [{
     key: "render",
     value: function render() {
+      console.log(15 / this.state.sec * 100);
       return /*#__PURE__*/_react.default.createElement("div", {
         className: "container"
       }, /*#__PURE__*/_react.default.createElement(_Btns.default, {
@@ -28653,6 +28782,14 @@ var App = /*#__PURE__*/function (_Component) {
         closeModalAndRestarHandeler: this.closeModalAndRestarHandeler,
         modalState: this.state.modal,
         btnClose: this.closeModalWithoutRestartHandeler
+      }), /*#__PURE__*/_react.default.createElement(_settings.default, {
+        min: this.regMinHandeler,
+        sec: this.regSecHandeler,
+        clicked: this.settingHnadeler,
+        settingState: this.state.setting,
+        play: !this.state.play,
+        currentMin: this.state.min,
+        currentSec: this.state.sec
       }));
     }
   }]);
@@ -28662,7 +28799,7 @@ var App = /*#__PURE__*/function (_Component) {
 
 var _default = App;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./components/Btns":"components/Btns.js","./components/Modal":"components/Modal.js","./components/Timer":"components/Timer.js","/main.css":"main.css"}],"index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./components/Btns":"components/Btns.js","./components/Modal":"components/Modal.js","./components/Timer":"components/Timer.js","./components/settings":"components/settings.js","/main.css":"main.css"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var React = _interopRequireWildcard(require("react"));
@@ -28706,7 +28843,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57127" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54417" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

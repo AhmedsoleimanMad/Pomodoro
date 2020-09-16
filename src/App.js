@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import Btns from "./components/Btns";
 import Modal from "./components/Modal";
-import Timer from "./components/Timer" 
-import "/main.css"
+import Timer from "./components/Timer";
+import Settings from "./components/settings";
+import "/main.css";
+
+let t;
 class App extends Component {
   state = {
     min: 15,
     sec: 5,
     play: false,
-    modal:false,
+    modal: false,
+    setting: false,
 
     allBtns: [
       {
@@ -28,8 +32,6 @@ class App extends Component {
         type: "add",
         icon: "fas fa-plus",
       },
-
-   
     ],
   };
 
@@ -39,31 +41,31 @@ class App extends Component {
         this.setState({
           play: !this.state.play,
         });
-        
-         let t = setInterval(() => {
 
-          console.log("Ahmed")
+        let t = setInterval(() => {
+          console.log("Ahmed");
           this.state.play
-          ? this.setState({
-              sec: this.state.sec - 1,
-            })
-          : clearInterval(t);
-         
+            ? this.setState((prevState) => ({
+                sec:
+                  prevState === this.state.sec
+                    ? this.state.sec
+                    : this.state.sec - 1,
+              }))
+            : clearInterval(t);
 
           if (this.state.sec === 0 && this.state.min > 0) {
             this.setState({
-              sec: 60,
+              sec: 59,
               min: this.state.min - 1,
             });
           }
-          if(this.state.min===0 && this.state.sec === 0){
+          if (this.state.min === 0 && this.state.sec === 0) {
             this.setState({
-              play :false,
-              modal:true,
+              play: false,
+              modal: true,
               min: 15,
               sec: 59,
-
-            }) 
+            });
           }
         }, 1000);
 
@@ -78,53 +80,87 @@ class App extends Component {
         break;
 
       case "minus":
-          this.setState({
-            min:this.state.min <=0 ? 0 : this.state.min - 1,
-          });
-       
+        this.setState({
+          min: this.state.min <= 0 ? 0 : this.state.min - 1,
+        });
+
         break;
 
       case "add":
-          this.setState({
-            min: this.state.min + 1,
-          });
+        this.setState({
+          min: this.state.min + 1,
+        });
         break;
     }
   };
 
-
-  closeModalAndRestarHandeler = ()=>{
+  closeModalAndRestarHandeler = () => {
     this.setState({
-      modal:false,
-      min:25,
-      sec:10,
-    })  
+      modal: false,
+      min: 25,
+      sec: 10,
+    });
 
-    this.btnHandeler(this.state.allBtns[0])
-  }
+    this.btnHandeler(this.state.allBtns[0]);
+  };
 
-
-  closeModalWithoutRestartHandeler = ()=>{
-
+  closeModalWithoutRestartHandeler = () => {
     this.setState({
-      modal:false,
-    }) 
+      modal: false,
+    });
+  };
 
-  }
+  regMinHandeler = (e) => {
+    this.setState({
+      min:
+        e.target.value > 25 || e.target.value < 0 || e.target.value == ""
+          ? 0
+          : parseInt(e.target.value),
+    });
+  };
+
+  regSecHandeler = (e) => {
+    this.setState({
+      sec:
+        e.target.value > 59 || e.target.value < 0 || e.target.value == ""
+          ? 0
+          : parseInt(e.target.value),
+    });
+  };
+
+  settingHnadeler = () => {
+    this.setState({
+      setting: !this.state.setting,
+    });
+  };
 
   render() {
+    console.log((15 / this.state.sec) * 100);
     return (
       <div className="container">
-        <Btns  status={this.state.play}  btns={this.state.allBtns}  click={this.btnHandeler} />
-        <Timer sec = {this.state.sec} min = {this.state.min}/>
-        <Modal closeModalAndRestarHandeler = {this.closeModalAndRestarHandeler}
-               modalState ={this.state.modal}
-               btnClose = {this.closeModalWithoutRestartHandeler}
-               
-               />
+        <Btns
+          status={this.state.play}
+          btns={this.state.allBtns}
+          click={this.btnHandeler}
+        />
+        <Timer sec={this.state.sec} min={this.state.min} />
+        <Modal
+          closeModalAndRestarHandeler={this.closeModalAndRestarHandeler}
+          modalState={this.state.modal}
+          btnClose={this.closeModalWithoutRestartHandeler}
+        />
+
+        <Settings
+          min={this.regMinHandeler}
+          sec={this.regSecHandeler}
+          clicked={this.settingHnadeler}
+          settingState={this.state.setting}
+          play={!this.state.play}
+          currentMin={this.state.min}
+          currentSec={this.state.sec}
+        />
       </div>
     );
   }
-
 }
 export default App;

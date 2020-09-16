@@ -1,20 +1,14 @@
 import React from "react";
-import "../main.css"
+import "../main.css";
 
-const timer = (props)=>{
-    return(
-      <ul className="timer">
-            <li>{props.min}</li>
-            <li>:</li>
-            <li>
-            {props.sec < 10 ? `0${props.sec}` : props.sec}
-            </li>
-      </ul>
+const timer = (props) => {
+  return (
+    <ul className="timer">
+      <li>{props.min < 10 ? `0${props.min}` : props.min}</li>
+      <li>:</li>
+      <li>{props.sec < 10 ? `0${props.sec}` : props.sec}</li>
+    </ul>
+  );
+};
 
-
-
-    )
-}
-
-
-export default timer;
+export default React.memo(timer);
