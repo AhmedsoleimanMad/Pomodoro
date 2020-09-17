@@ -28653,8 +28653,8 @@ var App = /*#__PURE__*/function (_Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      min: 15,
-      sec: 5,
+      min: 25,
+      sec: 59,
       play: false,
       modal: false,
       setting: false,
@@ -28689,18 +28689,18 @@ var App = /*#__PURE__*/function (_Component) {
               };
             }) : clearInterval(_t);
 
-            if (_this.state.sec === 0 && _this.state.min > 0) {
+            if (_this.state.sec <= 0 && _this.state.min > 0) {
               _this.setState({
                 sec: 59,
                 min: _this.state.min - 1
               });
             }
 
-            if (_this.state.min === 0 && _this.state.sec === 0) {
+            if (_this.state.min <= 0 && _this.state.sec <= 0) {
               _this.setState({
                 play: false,
                 modal: true,
-                min: 15,
+                min: 25,
                 sec: 59
               });
             }
@@ -28774,28 +28774,35 @@ var App = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       console.log(15 / this.state.sec * 100);
+      var _this$state = this.state,
+          play = _this$state.play,
+          allBtns = _this$state.allBtns,
+          sec = _this$state.sec,
+          min = _this$state.min,
+          modal = _this$state.modal,
+          setting = _this$state.setting;
       return /*#__PURE__*/_react.default.createElement("div", {
         className: "container"
       }, /*#__PURE__*/_react.default.createElement(_Btns.default, {
-        status: this.state.play,
-        btns: this.state.allBtns,
+        status: play,
+        btns: allBtns,
         click: this.btnHandeler
       }), /*#__PURE__*/_react.default.createElement(_Timer.default, {
-        sec: this.state.sec,
-        min: this.state.min,
-        play: this.state.play
+        sec: sec,
+        min: min,
+        play: play
       }), /*#__PURE__*/_react.default.createElement(_Modal.default, {
         closeModalAndRestarHandeler: this.closeModalAndRestarHandeler,
-        modalState: this.state.modal,
+        modalState: modal,
         btnClose: this.closeModalWithoutRestartHandeler
       }), /*#__PURE__*/_react.default.createElement(_settings.default, {
         min: this.regMinHandeler,
         sec: this.regSecHandeler,
         clicked: this.settingHnadeler,
-        settingState: this.state.setting,
+        settingState: setting,
         play: !this.state.play,
-        currentMin: this.state.min,
-        currentSec: this.state.sec
+        currentMin: min,
+        currentSec: sec
       }));
     }
   }]);
@@ -28849,7 +28856,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57170" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55802" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

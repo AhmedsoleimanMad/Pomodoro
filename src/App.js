@@ -8,8 +8,8 @@ import "/main.css";
 let t;
 class App extends Component {
   state = {
-    min: 15,
-    sec: 5,
+    min: 25,
+    sec: 59,
     play: false,
     modal: false,
     setting: false,
@@ -53,17 +53,17 @@ class App extends Component {
               }))
             : clearInterval(t);
 
-          if (this.state.sec === 0 && this.state.min > 0) {
+          if (this.state.sec <= 0 && this.state.min > 0) {
             this.setState({
               sec: 59,
               min: this.state.min - 1,
             });
           }
-          if (this.state.min === 0 && this.state.sec === 0) {
+          if (this.state.min <= 0 && this.state.sec <= 0) {
             this.setState({
               play: false,
               modal: true,
-              min: 15,
+              min: 25,
               sec: 59,
             });
           }
@@ -136,21 +136,14 @@ class App extends Component {
 
   render() {
     console.log((15 / this.state.sec) * 100);
+    const { play, allBtns, sec, min, modal, setting } = this.state;
     return (
       <div className="container">
-        <Btns
-          status={this.state.play}
-          btns={this.state.allBtns}
-          click={this.btnHandeler}
-        />
-        <Timer
-          sec={this.state.sec}
-          min={this.state.min}
-          play={this.state.play}
-        />
+        <Btns status={play} btns={allBtns} click={this.btnHandeler} />
+        <Timer sec={sec} min={min} play={play} />
         <Modal
           closeModalAndRestarHandeler={this.closeModalAndRestarHandeler}
-          modalState={this.state.modal}
+          modalState={modal}
           btnClose={this.closeModalWithoutRestartHandeler}
         />
 
@@ -158,10 +151,10 @@ class App extends Component {
           min={this.regMinHandeler}
           sec={this.regSecHandeler}
           clicked={this.settingHnadeler}
-          settingState={this.state.setting}
+          settingState={setting}
           play={!this.state.play}
-          currentMin={this.state.min}
-          currentSec={this.state.sec}
+          currentMin={min}
+          currentSec={sec}
         />
       </div>
     );
