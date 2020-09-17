@@ -1,5 +1,6 @@
 body {
-  background-color: #ccc;
+  background-color: #000;
+  color: #f4f4f4;
 }
 
 ul {
@@ -12,7 +13,7 @@ ul {
 }
 
 button {
-  background-color: #111;
+  background-color: rgba(109, 33, 79, 0.5);
   border: 0;
   font-size: 30px;
   margin: 20px;
@@ -36,6 +37,22 @@ i {
 
 .timer {
   font-size: 5em;
+  padding: 7rem 4rem;
+  border-radius: 100%;
+  box-shadow: -1px 2px 20px 1px #6d214f;
+  transition: 1s all ease-in-out;
+  border: 1px solid #eee;
+}
 
-  box-shadow: -1px 2px 6px 1px #111;
+.anim {
+  animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    box-shadow: -1px 2px 1px 1px rgba(123, 239, 178, 1);
+  }
+  to {
+    box-shadow: -1px 2px 30px 6px rgba(123, 239, 178, 1);
+  }
 }

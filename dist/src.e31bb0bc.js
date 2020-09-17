@@ -28452,7 +28452,7 @@ var modal = function modal(props) {
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column"
-  }, _defineProperty(_styleModal, "color", "#F4F4F4"), _defineProperty(_styleModal, "fontSize", "35px"), _styleModal);
+  }, _defineProperty(_styleModal, "color", "#F4F4F4"), _defineProperty(_styleModal, "fontSize", "35px"), _defineProperty(_styleModal, "zIndex", "100"), _styleModal);
   return /*#__PURE__*/_react.default.createElement("section", {
     style: styleModal
   }, /*#__PURE__*/_react.default.createElement("span", {
@@ -28460,7 +28460,12 @@ var modal = function modal(props) {
     onClick: props.btnClose
   }, /*#__PURE__*/_react.default.createElement("i", {
     className: "fas fa-times-circle"
-  })), /*#__PURE__*/_react.default.createElement("p", null, "Le Lorem Ipsum est simplement du faux texte employ\xE9 dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les ann\xE9es 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour r\xE9aliser un livre sp\xE9cimen de polices de texte. Il n'a pas fait que survivre cinq si\xE8cles, mais s'est aussi adapt\xE9 \xE0 la bureautique informatique, sans que son"), /*#__PURE__*/_react.default.createElement(_Btn.default, {
+  })), /*#__PURE__*/_react.default.createElement("p", {
+    style: {
+      width: "40%",
+      margin: "0 auto"
+    }
+  }, "Le Lorem Ipsum est simplement du faux texte employ\xE9 dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les ann\xE9es 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour r\xE9aliser un livre sp\xE9cimen de polices de texte. Il n'a pas fait que survivre cinq si\xE8cles, mais s'est aussi adapt\xE9 \xE0 la bureautique informatique, sans que son"), /*#__PURE__*/_react.default.createElement(_Btn.default, {
     click: props.closeModalAndRestarHandeler
   }, "Close Modal and restart"));
 };
@@ -28483,7 +28488,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var timer = function timer(props) {
   return /*#__PURE__*/_react.default.createElement("ul", {
-    className: "timer"
+    className: props.play ? "timer anim" : "timer"
   }, /*#__PURE__*/_react.default.createElement("li", null, props.min < 10 ? "0".concat(props.min) : props.min), /*#__PURE__*/_react.default.createElement("li", null, ":"), /*#__PURE__*/_react.default.createElement("li", null, props.sec < 10 ? "0".concat(props.sec) : props.sec));
 };
 
@@ -28518,7 +28523,7 @@ var style = {
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
-  backgroundColor: "#f4f4f4",
+  backgroundColor: "rgba(109, 33, 79, 0.5)",
   width: "160px",
   transition: ".5s transform ease-in",
   borderBottomRightRadius: "490px",
@@ -28553,7 +28558,7 @@ var reglage = function reglage(props) {
     onClick: props.clicked
   }, /*#__PURE__*/_react.default.createElement("i", {
     style: {
-      color: props.play ? "#111" : "#dc3545"
+      color: props.play ? "#6D214F" : "#dc3545"
     },
     className: "fas fa-cog"
   })), /*#__PURE__*/_react.default.createElement("form", {
@@ -28777,7 +28782,8 @@ var App = /*#__PURE__*/function (_Component) {
         click: this.btnHandeler
       }), /*#__PURE__*/_react.default.createElement(_Timer.default, {
         sec: this.state.sec,
-        min: this.state.min
+        min: this.state.min,
+        play: this.state.play
       }), /*#__PURE__*/_react.default.createElement(_Modal.default, {
         closeModalAndRestarHandeler: this.closeModalAndRestarHandeler,
         modalState: this.state.modal,
@@ -28843,7 +28849,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54635" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51209" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

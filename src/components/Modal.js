@@ -16,6 +16,7 @@ const modal = (props) => {
     flexDirection: "column",
     color: "#F4F4F4",
     fontSize: "35px",
+    zIndex: "100",
   };
 
   return (
@@ -23,7 +24,7 @@ const modal = (props) => {
       <span className="btnColse" onClick={props.btnClose}>
         <i className="fas fa-times-circle"></i>
       </span>
-      <p>
+      <p style={{ width: "40%", margin: "0 auto" }}>
         Le Lorem Ipsum est simplement du faux texte employé dans la composition
         et la mise en page avant impression. Le Lorem Ipsum est le faux texte
         standard de l'imprimerie depuis les années 1500, quand un imprimeur

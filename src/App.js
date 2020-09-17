@@ -143,7 +143,11 @@ class App extends Component {
           btns={this.state.allBtns}
           click={this.btnHandeler}
         />
-        <Timer sec={this.state.sec} min={this.state.min} />
+        <Timer
+          sec={this.state.sec}
+          min={this.state.min}
+          play={this.state.play}
+        />
         <Modal
           closeModalAndRestarHandeler={this.closeModalAndRestarHandeler}
           modalState={this.state.modal}

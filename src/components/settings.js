@@ -10,7 +10,7 @@ const style = {
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
-  backgroundColor: "#f4f4f4",
+  backgroundColor: "rgba(109, 33, 79, 0.5)",
   width: "160px",
   transition: ".5s transform ease-in",
   borderBottomRightRadius: "490px",
@@ -51,7 +51,7 @@ const reglage = (props) => {
     >
       <span style={iconStyle} onClick={props.clicked}>
         <i
-          style={{ color: props.play ? "#111" : "#dc3545" }}
+          style={{ color: props.play ? "#6D214F" : "#dc3545" }}
           className="fas fa-cog"
         ></i>
       </span>
